@@ -19,16 +19,27 @@ class StatusFilterChip extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FilterChip(
-      label: Text(label),
+      label: Text(
+        label,
+        textAlign: TextAlign.center,
+      ),
       selected: isSelected,
       onSelected: (_) => onSelected(),
-      backgroundColor: Colors.grey[200],
-      selectedColor: Theme.of(context).primaryColor.withOpacity(0.2),
-      checkmarkColor: Theme.of(context).primaryColor,
-      labelStyle: TextStyle(
-        color: isSelected ? Theme.of(context).primaryColor : Colors.black87,
-        fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+      backgroundColor: Colors.transparent,
+      selectedColor: Colors.teal,
+      showCheckmark: false,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(16),
+        side: const BorderSide(
+          color: Colors.tealAccent,
+          width: 1,
+        ),
       ),
+      labelStyle: TextStyle(
+          height: 0,
+          color: isSelected ? Theme.of(context).primaryColor : Colors.teal[50],
+          fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+          fontSize: 18),
     );
   }
 }

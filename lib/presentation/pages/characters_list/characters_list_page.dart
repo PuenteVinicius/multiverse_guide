@@ -201,7 +201,6 @@ class _CharactersListViewState extends State<CharactersListView> {
   Widget _buildStatusFilter() {
     return BlocBuilder<CharacterListBloc, CharacterListState>(
       builder: (context, state) {
-        // Ocultar filtros durante busca para simplificar a UI
         if (state.searchQuery != null) {
           return const SizedBox.shrink();
         }
@@ -213,15 +212,10 @@ class _CharactersListViewState extends State<CharactersListView> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  'Filtrar por status:',
-                  style: TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w500,
-                    color: Colors.grey,
-                  ),
+                const SizedBox(
+                  height: 14,
+                  width: 10,
                 ),
-                const SizedBox(height: 8),
                 Expanded(
                   child: ListView(
                     scrollDirection: Axis.horizontal,
@@ -232,7 +226,7 @@ class _CharactersListViewState extends State<CharactersListView> {
                         isSelected: _currentFilter == null,
                         onSelected: () => _onFilterSelected(null),
                       ),
-                      const SizedBox(width: 8),
+                      const SizedBox(width: 10),
                       StatusFilterChip(
                         label: 'Vivo',
                         status: CharacterStatus.alive,
@@ -240,7 +234,7 @@ class _CharactersListViewState extends State<CharactersListView> {
                         onSelected: () =>
                             _onFilterSelected(CharacterStatus.alive),
                       ),
-                      const SizedBox(width: 8),
+                      const SizedBox(width: 10),
                       StatusFilterChip(
                         label: 'Morto',
                         status: CharacterStatus.dead,
@@ -248,7 +242,7 @@ class _CharactersListViewState extends State<CharactersListView> {
                         onSelected: () =>
                             _onFilterSelected(CharacterStatus.dead),
                       ),
-                      const SizedBox(width: 8),
+                      const SizedBox(width: 10),
                       StatusFilterChip(
                         label: 'Desconhecido',
                         status: CharacterStatus.unknown,
@@ -273,7 +267,7 @@ class _CharactersListViewState extends State<CharactersListView> {
         context.read<CharacterListBloc>().add(FetchCharacters(
               page: 1,
               status: _currentFilter,
-              name: state.searchQuery, // ← Incluir busca no refresh
+              name: state.searchQuery,
             ));
       },
       child: ListView.builder(
