@@ -51,8 +51,8 @@ class CharacterCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(10),
         child: CachedNetworkImage(
           imageUrl: character.image,
-          width: 100,
-          height: 100,
+          width: 160,
+          height: 160,
           fit: BoxFit.fill,
           placeholder: (context, url) => Container(
             width: 70,
