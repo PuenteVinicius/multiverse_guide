@@ -90,30 +90,21 @@ class CharacterCard extends StatelessWidget {
         Text(
           character.name,
           style: const TextStyle(
-            fontSize: 16,
+            fontSize: 22,
             fontWeight: FontWeight.bold,
           ),
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
         ),
-        const SizedBox(height: 6),
+        const SizedBox(height: 4),
         // Status
         Row(
           children: [
-            Container(
-              width: 10,
-              height: 10,
-              decoration: BoxDecoration(
-                color: _getStatusColor(character.status),
-                shape: BoxShape.circle,
-              ),
-            ),
-            const SizedBox(width: 6),
             Text(
-              _getStatusText(character.status),
+              "${_getStatusText(character.status)} - ${character.species}",
               style: TextStyle(
-                fontSize: 14,
-                color: Colors.grey[700],
+                fontSize: 18,
+                color: _getStatusColor(character.status),
                 fontWeight: FontWeight.w500,
               ),
             ),
@@ -124,18 +115,8 @@ class CharacterCard extends StatelessWidget {
         Text(
           character.location,
           style: TextStyle(
-            fontSize: 13,
-            color: Colors.grey[600],
-          ),
-          maxLines: 1,
-          overflow: TextOverflow.ellipsis,
-        ),
-        // Espécie
-        Text(
-          character.species,
-          style: TextStyle(
-            fontSize: 12,
-            color: Colors.grey[500],
+            fontSize: 16,
+            color: Colors.grey[300],
           ),
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
