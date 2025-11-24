@@ -17,10 +17,9 @@ class CharacterDetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[50],
+      backgroundColor: Colors.teal[900],
       body: CustomScrollView(
         slivers: [
-          // AppBar com imagem hero
           SliverAppBar(
             expandedHeight: 300,
             stretch: true,
@@ -62,16 +61,12 @@ class CharacterDetailPage extends StatelessWidget {
                 padding: const EdgeInsets.all(16),
                 child: Column(
                   children: [
-                    // Cabeçalho com nome e status
                     _buildHeaderSection(),
                     const SizedBox(height: 16),
-                    // Informações básicas
                     _buildBasicInfoSection(),
                     const SizedBox(height: 16),
-                    // Localizações
                     _buildLocationSection(),
                     const SizedBox(height: 16),
-                    // Episódios
                     _buildEpisodesSection(),
                   ],
                 ),
@@ -226,7 +221,6 @@ class CharacterDetailPage extends StatelessWidget {
   }
 
   void _shareCharacter(BuildContext context) {
-    // Implementação básica - pode ser expandida com package de share
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text('Compartilhar ${character.name}'),

@@ -12,8 +12,7 @@ abstract class CharacterListEvent extends Equatable {
 class FetchCharacters extends CharacterListEvent {
   final int page;
   final CharacterStatus? status;
-  final String? name; // ← Adicionar parâmetro de busca
-
+  final String? name;
   const FetchCharacters({this.page = 1, this.status, this.name});
 
   @override
@@ -29,7 +28,6 @@ class FilterCharacters extends CharacterListEvent {
   List<Object> get props => [status ?? CharacterStatus.unknown];
 }
 
-// ← NOVO EVENTO: Buscar por nome
 class SearchCharacters extends CharacterListEvent {
   final String name;
 
@@ -39,5 +37,4 @@ class SearchCharacters extends CharacterListEvent {
   List<Object> get props => [name];
 }
 
-// ← NOVO EVENTO: Limpar busca
 class ClearSearch extends CharacterListEvent {}

@@ -8,7 +8,7 @@ import '../../../core/utils/injection_container.dart';
 import '../character_detail/character_detail_page.dart';
 import '../../widgets/character_card.dart';
 import '../../widgets/status_filter_chip.dart';
-import '../../widgets/search_bar.dart'; // ← Novo import
+import '../../widgets/search_bar.dart';
 import '../../../core/widgets/error_widget.dart';
 import '../../../core/widgets/loading_widget.dart';
 import '../../../domain/entities/character.dart';
@@ -115,7 +115,7 @@ class _CharactersListViewState extends State<CharactersListView> {
     context.read<CharacterListBloc>().add(FetchCharacters(
           page: 1,
           status: _currentFilter,
-          name: state.searchQuery, // ← Incluir busca no retry
+          name: state.searchQuery,
         ));
   }
 
@@ -123,8 +123,15 @@ class _CharactersListViewState extends State<CharactersListView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Multiverse Guide'),
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        title: const Padding(
+          padding: EdgeInsets.all(
+            20,
+          ),
+          child: Text(
+            'Multiverse Guide',
+          ),
+        ),
+        backgroundColor: Colors.transparent,
       ),
       body: Column(
         children: [

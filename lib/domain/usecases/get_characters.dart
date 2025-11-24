@@ -12,7 +12,7 @@ class GetCharacters {
   Future<Either<Failure, List<Character>>> call({
     int page = 1,
     CharacterStatus? status,
-    String? name, // ← Adicionar parâmetro de busca
+    String? name,
   }) async {
     return await repository.getCharacters(
         page: page, status: status, name: name);
@@ -22,7 +22,7 @@ class GetCharacters {
 class GetCharactersParams {
   final int page;
   final CharacterStatus? status;
-  final String? name; // ← Adicionar parâmetro de busca
+  final String? name;
 
   GetCharactersParams(map, {this.page = 1, this.status, this.name});
 }

@@ -7,7 +7,7 @@ abstract class CharacterRepository {
   Future<Either<Failure, List<Character>>> getCharacters({
     int page = 1,
     CharacterStatus? status,
-    String? name, // ← Adicionar parâmetro de busca
+    String? name,
   });
 
   Future<Either<Failure, Character>> getCharacterById(int id);

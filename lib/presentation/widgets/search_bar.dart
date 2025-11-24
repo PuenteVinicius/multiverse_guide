@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'dart:async'; // ← Adicionar este import
+import 'dart:async';
 
 class SearchBarWidget extends StatefulWidget {
   final ValueChanged<String> onSearchChanged;
@@ -27,8 +27,6 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
     if (widget.initialValue != null) {
       _controller.text = widget.initialValue!;
     }
-
-    // Debounce para evitar muitas requisições
     _controller.addListener(() {
       _onTextChanged(_controller.text);
     });
@@ -37,10 +35,8 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
   Timer? _debounceTimer;
 
   void _onTextChanged(String text) {
-    // Cancelar timer anterior
     _debounceTimer?.cancel();
 
-    // Iniciar novo timer (debounce de 500ms)
     _debounceTimer = Timer(const Duration(milliseconds: 500), () {
       widget.onSearchChanged(text);
     });

@@ -6,7 +6,6 @@ import 'package:multiverse_guide/domain/entities/character.dart';
 import 'package:multiverse_guide/domain/repositories/character_repository.dart';
 import 'package:multiverse_guide/domain/usecases/get_characters.dart';
 
-
 class MockCharacterRepository extends Mock implements CharacterRepository {}
 
 void main() {
@@ -41,7 +40,7 @@ void main() {
             page: any(named: 'page'),
             status: any(named: 'status'),
             name: any(named: 'name'),
-          )).thenAnswer((_) async => const Right(const Character));
+          )).thenAnswer((_) async => const Right(Character));
 
       // Act
       final result = await usecase(GetCharactersParams());

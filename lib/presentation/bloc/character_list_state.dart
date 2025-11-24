@@ -7,14 +7,14 @@ class CharacterListState extends Equatable {
   final bool hasReachedMax;
   final bool isLoading;
   final String? errorMessage;
-  final String? searchQuery; // ← Adicionar query de busca
+  final String? searchQuery;
 
   const CharacterListState({
     this.characters = const [],
     this.hasReachedMax = false,
     this.isLoading = false,
     this.errorMessage,
-    this.searchQuery, // ← Adicionar query de busca
+    this.searchQuery,
   });
 
   CharacterListState copyWith({
@@ -22,15 +22,14 @@ class CharacterListState extends Equatable {
     bool? hasReachedMax,
     bool? isLoading,
     String? errorMessage,
-    String? searchQuery, // ← Adicionar query de busca
+    String? searchQuery,
   }) {
     return CharacterListState(
       characters: characters ?? this.characters,
       hasReachedMax: hasReachedMax ?? this.hasReachedMax,
       isLoading: isLoading ?? this.isLoading,
       errorMessage: errorMessage,
-      searchQuery:
-          searchQuery ?? this.searchQuery, // ← Adicionar query de busca
+      searchQuery: searchQuery ?? this.searchQuery,
     );
   }
 
@@ -40,6 +39,6 @@ class CharacterListState extends Equatable {
         hasReachedMax,
         isLoading,
         errorMessage,
-        searchQuery, // ← Adicionar query de busca
+        searchQuery,
       ];
 }
