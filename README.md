@@ -15,6 +15,10 @@ Uma aplicação Flutter que consome a API do Rick and Morty.
 
 <div align="center">
 
+
+https://github.com/user-attachments/assets/80188c99-61d2-49ae-b431-c002d2aa7bac
+
+
 </div>
 
 ## 🎯 Funcionalidades
