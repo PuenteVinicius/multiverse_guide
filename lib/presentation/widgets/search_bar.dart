@@ -69,7 +69,7 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
             borderSide: BorderSide.none,
           ),
           filled: true,
-          fillColor: Colors.grey[100],
+          fillColor: Theme.of(context).primaryColor,
           contentPadding: const EdgeInsets.symmetric(horizontal: 16),
         ),
         textInputAction: TextInputAction.search,

@@ -74,7 +74,9 @@ class _CharactersListViewState extends State<CharactersListView> {
   }
 
   void _onSearchChanged(String query) {
-    context.read<CharacterListBloc>().add(SearchCharacters(name: query));
+    context
+        .read<CharacterListBloc>()
+        .add(SearchCharacters(name: query, status: _currentFilter));
   }
 
   void _onClearSearch() {
@@ -122,19 +124,20 @@ class _CharactersListViewState extends State<CharactersListView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Padding(
-          padding: EdgeInsets.all(
-            20,
-          ),
-          child: Text(
-            'Multiverse Guide',
-          ),
-        ),
-        backgroundColor: Colors.transparent,
-      ),
       body: Column(
         children: [
+          Container(
+            margin: const EdgeInsets.only(top: 32, bottom: 0),
+            child: Title(
+                color: Theme.of(context).primaryColor,
+                child: const Text(
+                  'Guia do Multiverso',
+                  style: TextStyle(
+                    fontSize: 36,
+                    color: Colors.tealAccent,
+                  ),
+                )),
+          ),
           SearchBarWidget(
             onSearchChanged: _onSearchChanged,
             onClearSearch: _onClearSearch,
@@ -208,10 +211,6 @@ class _CharactersListViewState extends State<CharactersListView> {
   Widget _buildStatusFilter() {
     return BlocBuilder<CharacterListBloc, CharacterListState>(
       builder: (context, state) {
-        if (state.searchQuery != null) {
-          return const SizedBox.shrink();
-        }
-
         return SizedBox(
           height: 70,
           child: Padding(

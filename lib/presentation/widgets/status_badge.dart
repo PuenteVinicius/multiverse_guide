@@ -10,6 +10,7 @@ class StatusBadge extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      width: double.infinity,
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
       decoration: BoxDecoration(
         color: _getStatusColor(status).withOpacity(0.1),
@@ -20,21 +21,14 @@ class StatusBadge extends StatelessWidget {
         ),
       ),
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
         mainAxisSize: MainAxisSize.min,
         children: [
-          Container(
-            width: 8,
-            height: 8,
-            decoration: BoxDecoration(
-              color: _getStatusColor(status),
-              shape: BoxShape.circle,
-            ),
-          ),
-          const SizedBox(width: 6),
           Text(
-            _getStatusText(status),
+            "Status: ${_getStatusText(status)}",
+            textAlign: TextAlign.center,
             style: TextStyle(
-              fontSize: 14,
+              fontSize: 20,
               fontWeight: FontWeight.w600,
               color: _getStatusColor(status),
             ),
@@ -51,7 +45,7 @@ class StatusBadge extends StatelessWidget {
       case CharacterStatus.dead:
         return Colors.red;
       case CharacterStatus.unknown:
-        return Colors.grey;
+        return Colors.orange;
     }
   }
 
@@ -62,7 +56,7 @@ class StatusBadge extends StatelessWidget {
       case CharacterStatus.dead:
         return 'Morto';
       case CharacterStatus.unknown:
-        return 'Status Desconhecido';
+        return 'Desconhecido';
     }
   }
 }

@@ -31,7 +31,7 @@ class StatusFilterChip extends StatelessWidget {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16),
         side: const BorderSide(
-          color: Colors.tealAccent,
+          color: Colors.teal,
           width: 1,
         ),
       ),

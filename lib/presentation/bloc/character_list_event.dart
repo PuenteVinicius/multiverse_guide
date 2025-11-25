@@ -30,8 +30,9 @@ class FilterCharacters extends CharacterListEvent {
 
 class SearchCharacters extends CharacterListEvent {
   final String name;
+  final CharacterStatus? status;
 
-  const SearchCharacters({required this.name});
+  const SearchCharacters({required this.name, this.status});
 
   @override
   List<Object> get props => [name];

@@ -17,7 +17,7 @@ class App extends StatelessWidget {
         useMaterial3: true,
         appBarTheme: const AppBarTheme(
           backgroundColor: Colors.teal,
-          foregroundColor: Colors.tealAccent,
+          foregroundColor: Colors.teal,
           elevation: 0,
         ),
       ),

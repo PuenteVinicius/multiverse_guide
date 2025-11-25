@@ -17,42 +17,18 @@ class CharacterDetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.teal[900],
+      backgroundColor: Theme.of(context).primaryColor,
       body: CustomScrollView(
         slivers: [
-          SliverAppBar(
-            expandedHeight: 300,
-            stretch: true,
-            flexibleSpace: FlexibleSpaceBar(
-              background: Hero(
-                tag: 'character-${character.id}',
-                child: CachedNetworkImage(
-                  imageUrl: character.image,
-                  fit: BoxFit.cover,
-                  placeholder: (context, url) => Container(
-                    color: Colors.grey[300],
-                    child: const Center(
-                      child: CircularProgressIndicator(),
-                    ),
-                  ),
-                  errorWidget: (context, url, error) => Container(
-                    color: Colors.grey[300],
-                    child: const Icon(
-                      Icons.error_outline,
-                      size: 48,
-                      color: Colors.grey,
-                    ),
-                  ),
-                ),
-              ),
+          const SliverAppBar(
+            iconTheme: IconThemeData(color: Colors.white),
+            backgroundColor: Colors.black,
+            title: Text(
+              'Detalhes do Personagem',
+              style: TextStyle(color: Colors.white),
             ),
+            stretch: true,
             pinned: true,
-            actions: [
-              IconButton(
-                icon: const Icon(Icons.share),
-                onPressed: () => _shareCharacter(context),
-              ),
-            ],
           ),
           // Conteúdo
           SliverList(
@@ -61,13 +37,15 @@ class CharacterDetailPage extends StatelessWidget {
                 padding: const EdgeInsets.all(16),
                 child: Column(
                   children: [
+                    _buildProfileSection(),
+                    const SizedBox(height: 16),
+                    _buildStatusSection(),
+                    const SizedBox(height: 16),
                     _buildHeaderSection(),
                     const SizedBox(height: 16),
                     _buildBasicInfoSection(),
                     const SizedBox(height: 16),
                     _buildLocationSection(),
-                    const SizedBox(height: 16),
-                    _buildEpisodesSection(),
                   ],
                 ),
               ),
@@ -78,31 +56,40 @@ class CharacterDetailPage extends StatelessWidget {
     );
   }
 
-  Widget _buildHeaderSection() {
-    return DetailSection(
-      title: 'Informações do Personagem',
-      padding: const EdgeInsets.all(20),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            character.name,
-            style: const TextStyle(
-              fontSize: 28,
-              fontWeight: FontWeight.bold,
-              height: 1.2,
+  Widget _buildProfileSection() {
+    return SizedBox(
+      width: double.infinity,
+      child: Hero(
+        tag: 'character-${character.id}',
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(12.0),
+          child: CachedNetworkImage(
+            imageUrl: character.image,
+            fit: BoxFit.fitWidth,
+            placeholder: (context, url) => Container(
+              color: Colors.grey[300],
+              child: const Center(
+                child: CircularProgressIndicator(),
+              ),
+            ),
+            errorWidget: (context, url, error) => Container(
+              color: Colors.grey[300],
+              child: const Icon(
+                Icons.error_outline,
+                size: 48,
+                color: Colors.grey,
+              ),
             ),
           ),
-          const SizedBox(height: 12),
-          StatusBadge(status: character.status),
-        ],
+        ),
       ),
     );
   }
 
-  Widget _buildBasicInfoSection() {
+  Widget _buildHeaderSection() {
     return DetailSection(
-      title: 'Detalhes',
+      title: 'Informações Pessoais',
+      icon: Icons.person_2_outlined,
       child: Column(
         children: [
           InfoRow(
@@ -115,15 +102,27 @@ class CharacterDetailPage extends StatelessWidget {
             label: 'Gênero',
             value: _getGenderText(character.gender),
           ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildBasicInfoSection() {
+    return DetailSection(
+      title: 'Origem e Localização',
+      icon: Icons.location_on_outlined,
+      child: Column(
+        children: [
           InfoRow(
-            label: 'Tipo',
+            label: 'Origem',
             value:
-                character.type.isNotEmpty ? character.type : 'Não especificado',
+                character.origin.isNotEmpty ? character.origin : 'Desconhecida',
           ),
           InfoRow(
-            label: 'Criado em',
-            value: _formatDate(character.created),
-          ),
+              label: 'Localização',
+              value: character.location.isNotEmpty
+                  ? character.location
+                  : 'Desconhecida'),
         ],
       ),
     );
@@ -131,76 +130,18 @@ class CharacterDetailPage extends StatelessWidget {
 
   Widget _buildLocationSection() {
     return DetailSection(
-      title: 'Localizações',
+      icon: Icons.live_tv_outlined,
+      title: 'Aparições',
       child: Column(
         children: [
-          InfoRow(
-            label: 'Origem',
-            value:
-                character.origin.isNotEmpty ? character.origin : 'Desconhecida',
-            trailing: character.origin.isNotEmpty
-                ? const Icon(
-                    Icons.public,
-                    color: Colors.blue,
-                    size: 18,
-                  )
-                : null,
-          ),
-          InfoRow(
-            label: 'Localização',
-            value: character.location.isNotEmpty
-                ? character.location
-                : 'Desconhecida',
-            trailing: character.location.isNotEmpty
-                ? const Icon(
-                    Icons.location_on,
-                    color: Colors.red,
-                    size: 18,
-                  )
-                : null,
-          ),
+          InfoRow(label: 'Episódios', value: '${character.episode.length}')
         ],
       ),
     );
   }
 
-  Widget _buildEpisodesSection() {
-    return DetailSection(
-      title: 'Participação',
-      child: Column(
-        children: [
-          InfoRow(
-            label: 'Episódios',
-            value: 'Aparece em ${character.episode.length} episódio(s)',
-            trailing: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
-              decoration: BoxDecoration(
-                color: Colors.blue.withOpacity(0.1),
-                borderRadius: BorderRadius.circular(12),
-              ),
-              child: Text(
-                character.episode.length.toString(),
-                style: const TextStyle(
-                  color: Colors.blue,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-          ),
-          if (character.episode.isNotEmpty) ...[
-            const SizedBox(height: 12),
-            const Text(
-              'Lista de episódios disponível na API',
-              style: TextStyle(
-                fontSize: 14,
-                color: Colors.grey,
-                fontStyle: FontStyle.italic,
-              ),
-            ),
-          ],
-        ],
-      ),
-    );
+  Widget _buildStatusSection() {
+    return StatusBadge(status: character.status);
   }
 
   String _getGenderText(String gender) {
@@ -214,18 +155,5 @@ class CharacterDetailPage extends StatelessWidget {
       default:
         return 'Desconhecido';
     }
-  }
-
-  String _formatDate(DateTime date) {
-    return '${date.day.toString().padLeft(2, '0')}/${date.month.toString().padLeft(2, '0')}/${date.year}';
-  }
-
-  void _shareCharacter(BuildContext context) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text('Compartilhar ${character.name}'),
-        duration: const Duration(seconds: 2),
-      ),
-    );
   }
 }
