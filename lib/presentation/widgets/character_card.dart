@@ -86,7 +86,6 @@ class CharacterCard extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // Nome
         Text(
           character.name,
           style: const TextStyle(
@@ -97,7 +96,6 @@ class CharacterCard extends StatelessWidget {
           overflow: TextOverflow.ellipsis,
         ),
         const SizedBox(height: 4),
-        // Status
         Row(
           children: [
             Text(
@@ -111,7 +109,6 @@ class CharacterCard extends StatelessWidget {
           ],
         ),
         const SizedBox(height: 4),
-        // Localização
         Text(
           character.location,
           style: TextStyle(

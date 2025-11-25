@@ -1,4 +1,3 @@
-// Failures são usados na camada de domínio para representar erros
 import 'package:equatable/equatable.dart';
 
 abstract class Failure extends Equatable {
