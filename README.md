@@ -76,18 +76,6 @@ graph TB
     end
 ```
 
-### **📚 Stack Tecnológica**
-
-| Camada                      | Tecnologias                                   |
-| --------------------------- | --------------------------------------------- |
-| **Framework**               | Flutter 3.13.0, Dart 3.0.0                    |
-| **Gerenciamento de Estado** | **flutter_bloc** (oficial do Flutter)         |
-| **Injeção de Dependência**  | **get_it**                                    |
-| **HTTP Client**             | **http** (oficial)                            |
-| **Cache de Imagens**        | **cached_network_image**                      |
-| **Testes**                  | **flutter_test**, **mocktail**, **bloc_test** |
-| **Linting**                 | **flutter_lints**                             |
-
 ### **🤔 Por que BLoC + Clean Architecture?**
 
 1. **Seperação de Responsabilidades**: Cada camada tem uma responsabilidade única
@@ -129,9 +117,5 @@ flutter test
 
 # Executar testes com cobertura
 flutter test --coverage
-
-# Executar testes específicos
-flutter test test/presentation/bloc/character_list_bloc_test.dart
-flutter test test/data/repositories/character_repository_impl_test.dart
 
 ```
