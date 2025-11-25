@@ -48,24 +48,6 @@ void main() {
     results: [tCharacterModel],
   );
 
-  const tEmptyCharacterResponseModel = CharacterResponseModel(
-    info: InfoModel(count: 0, pages: 0, next: null, prev: null),
-    results: [],
-  );
-
-  const tCharacter = Character(
-    id: 1,
-    name: 'Rick Sanchez',
-    status: CharacterStatus.alive,
-    species: 'Human',
-    type: '',
-    gender: 'Male',
-    image: 'https://rickandmortyapi.com/api/character/avatar/1.jpeg',
-    location: 'Earth',
-    origin: 'Earth',
-    episode: ['https://rickandmortyapi.com/api/episode/1'],
-  );
-
   group('getCharacters', () {
     test('should pass correct parameters to remote data source', () async {
       when(() => mockRemoteDataSource.getCharacters(

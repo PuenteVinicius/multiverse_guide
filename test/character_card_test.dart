@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:mocktail/mocktail.dart' show Mock;
 
 import 'package:multiverse_guide/domain/entities/character.dart';
 import 'package:multiverse_guide/presentation/widgets/character_card.dart';
