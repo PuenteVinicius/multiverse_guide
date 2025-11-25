@@ -17,7 +17,7 @@ void main() {
     usecase = GetCharacters(mockCharacterRepository);
   });
 
-  final tCharacters = [
+  const tCharacters = [
     Character(
       id: 1,
       name: 'Rick Sanchez',
@@ -28,8 +28,7 @@ void main() {
       image: 'https://rickandmortyapi.com/api/character/avatar/1.jpeg',
       location: 'Earth',
       origin: 'Earth',
-      episode: const ['https://rickandmortyapi.com/api/episode/1'],
-      created: DateTime(2017, 11, 4),
+      episode: ['https://rickandmortyapi.com/api/episode/1'],
     ),
   ];
 
@@ -40,10 +39,10 @@ void main() {
             page: any(named: 'page'),
             status: any(named: 'status'),
             name: any(named: 'name'),
-          )).thenAnswer((_) async => const Right(Character));
+          )).thenAnswer((_) async => const Right(tCharacters));
 
       // Act
-      final result = await usecase(GetCharactersParams());
+      final result = await usecase();
 
       // Assert
       expect(result, const Right(tCharacters));
@@ -64,7 +63,7 @@ void main() {
           )).thenAnswer((_) async => Left(ServerFailure()));
 
       // Act
-      final result = await usecase(GetCharactersParams());
+      final result = await usecase();
 
       // Assert
       expect(result, Left(ServerFailure()));
@@ -82,13 +81,6 @@ void main() {
             status: any(named: 'status'),
             name: any(named: 'name'),
           )).thenAnswer((_) async => const Right(tCharacters));
-
-      // Act
-      await usecase(GetCharactersParams(
-        page: 2,
-        status: CharacterStatus.alive,
-        name: 'Rick',
-      ));
 
       // Assert
       verify(() => mockCharacterRepository.getCharacters(

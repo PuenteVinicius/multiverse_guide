@@ -13,7 +13,7 @@ class Character extends Equatable {
   final String location;
   final String origin;
   final List<String> episode;
-  final DateTime created;
+  final DateTime? created;
 
   const Character({
     required this.id,
@@ -26,7 +26,7 @@ class Character extends Equatable {
     required this.location,
     required this.origin,
     required this.episode,
-    required this.created,
+    this.created,
   });
 
   @override
