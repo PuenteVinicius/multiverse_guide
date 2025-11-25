@@ -8,7 +8,7 @@ abstract class CharacterRemoteDataSource {
   Future<CharacterResponseModel> getCharacters({
     int page = 1,
     String? status,
-    String? name, // ← Adicionar parâmetro de busca
+    String? name,
   });
 }
 
@@ -21,7 +21,7 @@ class CharacterRemoteDataSourceImpl implements CharacterRemoteDataSource {
   Future<CharacterResponseModel> getCharacters({
     int page = 1,
     String? status,
-    String? name, // ← Adicionar parâmetro de busca
+    String? name,
   }) async {
     final queryParams = <String>['page=$page'];
 
@@ -41,7 +41,6 @@ class CharacterRemoteDataSourceImpl implements CharacterRemoteDataSource {
     if (response.statusCode == 200) {
       return CharacterResponseModel.fromJson(json.decode(response.body));
     } else if (response.statusCode == 404) {
-      // A API retorna 404 quando não encontra resultados
       return const CharacterResponseModel(
         info: InfoModel(count: 0, pages: 0, next: null, prev: null),
         results: [],

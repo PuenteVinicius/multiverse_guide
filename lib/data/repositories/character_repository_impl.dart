@@ -14,7 +14,7 @@ class CharacterRepositoryImpl implements CharacterRepository {
   Future<Either<Failure, List<Character>>> getCharacters({
     int page = 1,
     CharacterStatus? status,
-    String? name, // ← Adicionar parâmetro de busca
+    String? name,
   }) async {
     try {
       final response = await remoteDataSource.getCharacters(
@@ -29,7 +29,7 @@ class CharacterRepositoryImpl implements CharacterRepository {
 
       return Right(characters);
     } catch (e) {
-      throw Exception();
+      return Left(ServerFailure());
     }
   }
 
