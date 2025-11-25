@@ -15,9 +15,7 @@ Uma aplicação Flutter que consome a API do Rick and Morty.
 
 <div align="center">
 
-
 https://github.com/user-attachments/assets/80188c99-61d2-49ae-b431-c002d2aa7bac
-
 
 </div>
 
@@ -80,13 +78,11 @@ graph TB
     end
 ```
 
-### **🤔 Por que BLoC + Clean Architecture?**
+### **🤔 Justificativa de escolhas **
 
-1. **Seperação de Responsabilidades**: Cada camada tem uma responsabilidade única
-2. **Testabilidade**: Fácil de mockar e testar cada componente isoladamente
-3. **Manutenibilidade**: Mudanças em uma camada não afetam as outras
-4. **Escalabilidade**: Nova features podem ser adicionadas sem refatorar código existente
-5. **Padrão Oficial**: BLoC é recomendado e mantido pelo time do Flutter
+Utilizar **Bloc** com **Clean Architeture** Trazem uma série de vantagens como maior testabilidade, maior manutenibilidade
+e escalabilidade, já que graças ao clean architeture nós conseguimos separar o código em camadas o que facilita os testes, e a escrita do código
+e com relação ao BLoc ele foi escolhido por ser o padrão oficial do time do flutter o que faz com que tenha muito material sobre caso precise utiliza-lo para algo mais complexo, e também por ser mantido pelo time do flutter e ser de fácil compreensão
 
 ## 🚀 Como Executar o Projeto
 
@@ -100,7 +96,7 @@ graph TB
 
 ```bash
 # 1. Clone o repositório
-git clone https://github.com/seu-usuario/guia-multiverso.git
+git clone https://github.com/PuenteVinicius/multiverse_guide
 cd guia-multiverso
 
 # 2. Instale as dependências
