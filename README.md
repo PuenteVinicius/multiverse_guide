@@ -78,7 +78,7 @@ graph TB
     end
 ```
 
-### **🤔 Justificativa de escolhas **
+### 🤔 Justificativa de escolhas Técnincas
 
 Utilizar **Bloc** com **Clean Architeture** Trazem uma série de vantagens como maior testabilidade, maior manutenibilidade
 e escalabilidade, já que graças ao clean architeture nós conseguimos separar o código em camadas o que facilita os testes, e a escrita do código
