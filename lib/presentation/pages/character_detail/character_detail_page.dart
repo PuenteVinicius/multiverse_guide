@@ -30,7 +30,6 @@ class CharacterDetailPage extends StatelessWidget {
             stretch: true,
             pinned: true,
           ),
-          // Conteúdo
           SliverList(
             delegate: SliverChildListDelegate([
               Padding(
@@ -41,11 +40,11 @@ class CharacterDetailPage extends StatelessWidget {
                     const SizedBox(height: 16),
                     _buildStatusSection(),
                     const SizedBox(height: 16),
-                    _buildHeaderSection(),
+                    _buildPersonalInformationSection(),
                     const SizedBox(height: 16),
-                    _buildBasicInfoSection(),
+                    _buildOriginAndLocationSection(),
                     const SizedBox(height: 16),
-                    _buildLocationSection(),
+                    _buildEpisodes(),
                   ],
                 ),
               ),
@@ -86,7 +85,7 @@ class CharacterDetailPage extends StatelessWidget {
     );
   }
 
-  Widget _buildHeaderSection() {
+  Widget _buildPersonalInformationSection() {
     return DetailSection(
       title: 'Informações Pessoais',
       icon: Icons.person_2_outlined,
@@ -107,7 +106,7 @@ class CharacterDetailPage extends StatelessWidget {
     );
   }
 
-  Widget _buildBasicInfoSection() {
+  Widget _buildOriginAndLocationSection() {
     return DetailSection(
       title: 'Origem e Localização',
       icon: Icons.location_on_outlined,
@@ -128,7 +127,7 @@ class CharacterDetailPage extends StatelessWidget {
     );
   }
 
-  Widget _buildLocationSection() {
+  Widget _buildEpisodes() {
     return DetailSection(
       icon: Icons.live_tv_outlined,
       title: 'Aparições',

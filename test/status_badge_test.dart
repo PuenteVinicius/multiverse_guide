@@ -5,7 +5,6 @@ import 'package:multiverse_guide/domain/entities/character.dart';
 import 'package:multiverse_guide/presentation/widgets/status_badge.dart';
 
 void main() {
-  // Widget para teste
   Widget createWidgetUnderTest(CharacterStatus status) {
     return MaterialApp(
       home: Scaffold(
@@ -17,38 +16,30 @@ void main() {
   group('StatusBadge Rendering', () {
     testWidgets('should render StatusBadge without errors',
         (WidgetTester tester) async {
-      // Arrange & Act
       await tester.pumpWidget(createWidgetUnderTest(CharacterStatus.alive));
 
-      // Assert
       expect(find.byType(StatusBadge), findsOneWidget);
       expect(find.byType(Container), findsOneWidget);
     });
 
     testWidgets('should display correct text for alive status',
         (WidgetTester tester) async {
-      // Arrange & Act
       await tester.pumpWidget(createWidgetUnderTest(CharacterStatus.alive));
 
-      // Assert
       expect(find.text('Status: Vivo'), findsOneWidget);
     });
 
     testWidgets('should display correct text for dead status',
         (WidgetTester tester) async {
-      // Arrange & Act
       await tester.pumpWidget(createWidgetUnderTest(CharacterStatus.dead));
 
-      // Assert
       expect(find.text('Status: Morto'), findsOneWidget);
     });
 
     testWidgets('should display correct text for unknown status',
         (WidgetTester tester) async {
-      // Arrange & Act
       await tester.pumpWidget(createWidgetUnderTest(CharacterStatus.unknown));
 
-      // Assert
       expect(find.text('Status: Desconhecido'), findsOneWidget);
     });
   });
@@ -56,10 +47,8 @@ void main() {
   group('StatusBadge Colors', () {
     testWidgets('should have green color for alive status',
         (WidgetTester tester) async {
-      // Arrange & Act
       await tester.pumpWidget(createWidgetUnderTest(CharacterStatus.alive));
 
-      // Assert
       final container = tester.widget<Container>(find.byType(Container));
       final boxDecoration = container.decoration as BoxDecoration;
       final border = boxDecoration.border as Border;
@@ -74,10 +63,8 @@ void main() {
 
     testWidgets('should have red color for dead status',
         (WidgetTester tester) async {
-      // Arrange & Act
       await tester.pumpWidget(createWidgetUnderTest(CharacterStatus.dead));
 
-      // Assert
       final container = tester.widget<Container>(find.byType(Container));
       final boxDecoration = container.decoration as BoxDecoration;
       final border = boxDecoration.border as Border;
@@ -92,10 +79,8 @@ void main() {
 
     testWidgets('should have orange color for unknown status',
         (WidgetTester tester) async {
-      // Arrange & Act
       await tester.pumpWidget(createWidgetUnderTest(CharacterStatus.unknown));
 
-      // Assert
       final container = tester.widget<Container>(find.byType(Container));
       final boxDecoration = container.decoration as BoxDecoration;
       final border = boxDecoration.border as Border;
@@ -110,10 +95,8 @@ void main() {
 
     testWidgets('should have background color with opacity for alive status',
         (WidgetTester tester) async {
-      // Arrange & Act
       await tester.pumpWidget(createWidgetUnderTest(CharacterStatus.alive));
 
-      // Assert
       final container = tester.widget<Container>(find.byType(Container));
       final boxDecoration = container.decoration as BoxDecoration;
 
@@ -123,10 +106,8 @@ void main() {
 
     testWidgets('should have background color with opacity for dead status',
         (WidgetTester tester) async {
-      // Arrange & Act
       await tester.pumpWidget(createWidgetUnderTest(CharacterStatus.dead));
 
-      // Assert
       final container = tester.widget<Container>(find.byType(Container));
       final boxDecoration = container.decoration as BoxDecoration;
 
@@ -136,10 +117,8 @@ void main() {
 
     testWidgets('should have background color with opacity for unknown status',
         (WidgetTester tester) async {
-      // Arrange & Act
       await tester.pumpWidget(createWidgetUnderTest(CharacterStatus.unknown));
 
-      // Assert
       final container = tester.widget<Container>(find.byType(Container));
       final boxDecoration = container.decoration as BoxDecoration;
 
@@ -150,10 +129,8 @@ void main() {
 
   group('StatusBadge Styling', () {
     testWidgets('should have correct padding', (WidgetTester tester) async {
-      // Arrange & Act
       await tester.pumpWidget(createWidgetUnderTest(CharacterStatus.alive));
 
-      // Assert
       final container = tester.widget<Container>(find.byType(Container));
       expect(container.padding,
           const EdgeInsets.symmetric(horizontal: 12, vertical: 6));
@@ -161,10 +138,8 @@ void main() {
 
     testWidgets('should have correct border radius',
         (WidgetTester tester) async {
-      // Arrange & Act
       await tester.pumpWidget(createWidgetUnderTest(CharacterStatus.alive));
 
-      // Assert
       final container = tester.widget<Container>(find.byType(Container));
       final boxDecoration = container.decoration as BoxDecoration;
       expect(boxDecoration.borderRadius, BorderRadius.circular(20));
@@ -172,10 +147,8 @@ void main() {
 
     testWidgets('should have correct border width',
         (WidgetTester tester) async {
-      // Arrange & Act
       await tester.pumpWidget(createWidgetUnderTest(CharacterStatus.alive));
 
-      // Assert
       final container = tester.widget<Container>(find.byType(Container));
       final boxDecoration = container.decoration as BoxDecoration;
       final border = boxDecoration.border as Border;
@@ -183,10 +156,8 @@ void main() {
     });
 
     testWidgets('should have correct text style', (WidgetTester tester) async {
-      // Arrange & Act
       await tester.pumpWidget(createWidgetUnderTest(CharacterStatus.alive));
 
-      // Assert
       final text = tester.widget<Text>(find.text('Status: Vivo'));
       expect(text.style?.fontSize, 20);
       expect(text.style?.fontWeight, FontWeight.w600);
@@ -197,10 +168,8 @@ void main() {
   group('StatusBadge Layout', () {
     testWidgets('should have Row with centered content',
         (WidgetTester tester) async {
-      // Arrange & Act
       await tester.pumpWidget(createWidgetUnderTest(CharacterStatus.alive));
 
-      // Assert
       final row = tester.widget<Row>(find.byType(Row));
       expect(row.mainAxisAlignment, MainAxisAlignment.center);
       expect(row.mainAxisSize, MainAxisSize.min);
@@ -208,19 +177,15 @@ void main() {
 
     testWidgets('should contain only one text widget',
         (WidgetTester tester) async {
-      // Arrange & Act
       await tester.pumpWidget(createWidgetUnderTest(CharacterStatus.alive));
 
-      // Assert
       expect(find.byType(Text), findsOneWidget);
     });
 
     testWidgets('should have correct widget hierarchy',
         (WidgetTester tester) async {
-      // Arrange & Act
       await tester.pumpWidget(createWidgetUnderTest(CharacterStatus.alive));
 
-      // Assert
       expect(find.byType(StatusBadge), findsOneWidget);
       expect(
           find.descendant(
@@ -246,19 +211,15 @@ void main() {
   group('StatusBadge Accessibility', () {
     testWidgets('should be semantically labeled with status text',
         (WidgetTester tester) async {
-      // Arrange & Act
       await tester.pumpWidget(createWidgetUnderTest(CharacterStatus.alive));
 
-      // Assert
       expect(find.bySemanticsLabel(RegExp(r'Status: Vivo')), findsOneWidget);
     });
 
     testWidgets('should have sufficient color contrast for alive status',
         (WidgetTester tester) async {
-      // Arrange & Act
       await tester.pumpWidget(createWidgetUnderTest(CharacterStatus.alive));
 
-      // Assert
       final container = tester.widget<Container>(find.byType(Container));
       final boxDecoration = container.decoration as BoxDecoration;
       final text = tester.widget<Text>(find.text('Status: Vivo'));
@@ -270,10 +231,8 @@ void main() {
 
     testWidgets('should have sufficient color contrast for dead status',
         (WidgetTester tester) async {
-      // Arrange & Act
       await tester.pumpWidget(createWidgetUnderTest(CharacterStatus.dead));
 
-      // Assert
       final container = tester.widget<Container>(find.byType(Container));
       final boxDecoration = container.decoration as BoxDecoration;
       final text = tester.widget<Text>(find.text('Status: Morto'));
@@ -285,10 +244,8 @@ void main() {
 
     testWidgets('should have sufficient color contrast for unknown status',
         (WidgetTester tester) async {
-      // Arrange & Act
       await tester.pumpWidget(createWidgetUnderTest(CharacterStatus.unknown));
 
-      // Assert
       final container = tester.widget<Container>(find.byType(Container));
       final boxDecoration = container.decoration as BoxDecoration;
       final text = tester.widget<Text>(find.text('Status: Desconhecido'));
@@ -302,7 +259,6 @@ void main() {
   group('StatusBadge Performance', () {
     testWidgets('should build quickly without expensive operations',
         (WidgetTester tester) async {
-      // Arrange & Act & Assert
       expect(() async {
         await tester.pumpWidget(createWidgetUnderTest(CharacterStatus.alive));
       }, returnsNormally);
@@ -310,14 +266,11 @@ void main() {
 
     testWidgets('should rebuild when status changes',
         (WidgetTester tester) async {
-      // Arrange
       await tester.pumpWidget(createWidgetUnderTest(CharacterStatus.alive));
       expect(find.text('Status: Vivo'), findsOneWidget);
 
-      // Act - Mudar status
       await tester.pumpWidget(createWidgetUnderTest(CharacterStatus.dead));
 
-      // Assert - Deve atualizar o texto
       expect(find.text('Status: Morto'), findsOneWidget);
       expect(find.text('Status: Vivo'), findsNothing);
     });
@@ -326,14 +279,11 @@ void main() {
   group('StatusBadge Edge Cases', () {
     testWidgets('should handle all status enum values',
         (WidgetTester tester) async {
-      // Testa todos os valores do enum CharacterStatus
       for (final status in CharacterStatus.values) {
         await tester.pumpWidget(createWidgetUnderTest(status));
 
-        // Verifica se renderiza sem erro
         expect(find.byType(StatusBadge), findsOneWidget);
 
-        // Limpa para próximo teste
         await tester.pumpWidget(Container());
       }
     });
@@ -366,7 +316,6 @@ void main() {
   group('StatusBadge Responsiveness', () {
     testWidgets('should adapt to different screen sizes',
         (WidgetTester tester) async {
-      // Arrange & Act
       await tester.pumpWidget(
         const MaterialApp(
           home: Scaffold(
@@ -378,7 +327,6 @@ void main() {
         ),
       );
 
-      // Assert - Deve se adaptar à largura do pai
       expect(find.byType(StatusBadge), findsOneWidget);
       expect(find.text('Status: Vivo'), findsOneWidget);
     });

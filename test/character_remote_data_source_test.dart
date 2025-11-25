@@ -8,7 +8,6 @@ import 'package:multiverse_guide/data/datasources/character_remote_data_source.d
 import 'package:multiverse_guide/data/models/character_model.dart';
 import 'package:multiverse_guide/data/models/character_response_model.dart';
 
-// Mocks
 class MockHttpClient extends Mock implements http.Client {}
 
 class FakeUri extends Fake implements Uri {}
@@ -26,7 +25,6 @@ void main() {
     dataSource = CharacterRemoteDataSourceImpl(client: mockHttpClient);
   });
 
-  // Test data
   final tJsonResponse = {
     "info": {"count": 2, "pages": 1, "next": null, "prev": null},
     "results": [
@@ -143,15 +141,12 @@ void main() {
   group('getCharacters', () {
     test('should return CharacterResponseModel when the response is 200',
         () async {
-      // Arrange
       when(() => mockHttpClient.get(any())).thenAnswer(
         (_) async => http.Response(json.encode(tJsonResponse), 200),
       );
 
-      // Act
       final result = await dataSource.getCharacters();
 
-      // Assert
       expect(result.info.count, tCharacterResponseModel.info.count);
       expect(result.info.pages, tCharacterResponseModel.info.pages);
       expect(result.results.length, tCharacterResponseModel.results.length);
@@ -161,15 +156,12 @@ void main() {
 
     test('should return empty CharacterResponseModel when the response is 404',
         () async {
-      // Arrange
       when(() => mockHttpClient.get(any())).thenAnswer(
         (_) async => http.Response(json.encode(tEmptyJsonResponse), 404),
       );
 
-      // Act
       final result = await dataSource.getCharacters();
 
-      // Assert
       expect(result.info.count, 0);
       expect(result.info.pages, 0);
       expect(result.results, isEmpty);
@@ -178,43 +170,34 @@ void main() {
 
     test('should throw Exception when the response is not 200 or 404',
         () async {
-      // Arrange
       when(() => mockHttpClient.get(any())).thenAnswer(
         (_) async => http.Response('Server Error', 500),
       );
 
-      // Act
       final call = dataSource.getCharacters;
 
-      // Assert
       expect(() => call(), throwsA(isA<Exception>()));
     });
 
     test('should throw Exception when the response has malformed JSON',
         () async {
-      // Arrange
       when(() => mockHttpClient.get(any())).thenAnswer(
         (_) async => http.Response('Invalid JSON', 200),
       );
 
-      // Act
       final call = dataSource.getCharacters;
 
-      // Assert
       expect(() => call(), throwsA(isA<Exception>()));
     });
 
     test('should call http client with correct base URL and default parameters',
         () async {
-      // Arrange
       when(() => mockHttpClient.get(any())).thenAnswer(
         (_) async => http.Response(json.encode(tJsonResponse), 200),
       );
 
-      // Act
       await dataSource.getCharacters();
 
-      // Assert
       verify(() => mockHttpClient.get(Uri.parse(
             'https://rickandmortyapi.com/api/character?page=1',
           ))).called(1);
@@ -222,15 +205,12 @@ void main() {
 
     test('should call http client with correct URL when page is specified',
         () async {
-      // Arrange
       when(() => mockHttpClient.get(any())).thenAnswer(
         (_) async => http.Response(json.encode(tJsonResponse), 200),
       );
 
-      // Act
       await dataSource.getCharacters(page: 2);
 
-      // Assert
       verify(() => mockHttpClient.get(Uri.parse(
             'https://rickandmortyapi.com/api/character?page=2',
           ))).called(1);
@@ -238,15 +218,12 @@ void main() {
 
     test('should call http client with correct URL when status is specified',
         () async {
-      // Arrange
       when(() => mockHttpClient.get(any())).thenAnswer(
         (_) async => http.Response(json.encode(tJsonResponse), 200),
       );
 
-      // Act
       await dataSource.getCharacters(status: 'alive');
 
-      // Assert
       verify(() => mockHttpClient.get(Uri.parse(
             'https://rickandmortyapi.com/api/character?page=1&status=alive',
           ))).called(1);
@@ -254,15 +231,12 @@ void main() {
 
     test('should call http client with correct URL when name is specified',
         () async {
-      // Arrange
       when(() => mockHttpClient.get(any())).thenAnswer(
         (_) async => http.Response(json.encode(tJsonResponse), 200),
       );
 
-      // Act
       await dataSource.getCharacters(name: 'Rick');
 
-      // Assert
       verify(() => mockHttpClient.get(Uri.parse(
             'https://rickandmortyapi.com/api/character?page=1&name=Rick',
           ))).called(1);
@@ -271,19 +245,16 @@ void main() {
     test(
         'should call http client with correct URL when all parameters are specified',
         () async {
-      // Arrange
       when(() => mockHttpClient.get(any())).thenAnswer(
         (_) async => http.Response(json.encode(tJsonResponse), 200),
       );
 
-      // Act
       await dataSource.getCharacters(
         page: 3,
         status: 'dead',
         name: 'Morty',
       );
 
-      // Assert
       verify(() => mockHttpClient.get(Uri.parse(
             'https://rickandmortyapi.com/api/character?page=3&status=dead&name=Morty',
           ))).called(1);
@@ -291,79 +262,64 @@ void main() {
 
     test('should not include name parameter when name is empty string',
         () async {
-      // Arrange
       when(() => mockHttpClient.get(any())).thenAnswer(
         (_) async => http.Response(json.encode(tJsonResponse), 200),
       );
 
-      // Act
       await dataSource.getCharacters(name: '');
 
-      // Assert
       verify(() => mockHttpClient.get(Uri.parse(
             'https://rickandmortyapi.com/api/character?page=1',
           ))).called(1);
     });
 
     test('should not include name parameter when name is null', () async {
-      // Arrange
       when(() => mockHttpClient.get(any())).thenAnswer(
         (_) async => http.Response(json.encode(tJsonResponse), 200),
       );
 
-      // Act
       await dataSource.getCharacters(name: null);
 
-      // Assert
       verify(() => mockHttpClient.get(Uri.parse(
             'https://rickandmortyapi.com/api/character?page=1',
           ))).called(1);
     });
 
     test('should not include status parameter when status is null', () async {
-      // Arrange
       when(() => mockHttpClient.get(any())).thenAnswer(
         (_) async => http.Response(json.encode(tJsonResponse), 200),
       );
 
-      // Act
       await dataSource.getCharacters(status: null);
 
-      // Assert
       verify(() => mockHttpClient.get(Uri.parse(
             'https://rickandmortyapi.com/api/character?page=1',
           ))).called(1);
     });
 
     test('should handle URL encoding for special characters in name', () async {
-      // Arrange
       when(() => mockHttpClient.get(any())).thenAnswer(
         (_) async => http.Response(json.encode(tJsonResponse), 200),
       );
 
-      // Act
       await dataSource.getCharacters(name: 'Rick & Morty');
 
-      // Assert
       verify(() => mockHttpClient.get(Uri.parse(
             'https://rickandmortyapi.com/api/character?page=1&name=Rick & Morty',
           ))).called(1);
     });
 
     test('should handle URL with multiple parameters correctly', () async {
-      // Arrange
       when(() => mockHttpClient.get(any())).thenAnswer(
         (_) async => http.Response(json.encode(tJsonResponse), 200),
       );
 
-      // Act
       await dataSource.getCharacters(
         page: 5,
         status: 'unknown',
         name: 'Alien',
       );
 
-      // Assert
       const expectedUrl =
           'https://rickandmortyapi.com/api/character?page=5&status=unknown&name=Alien';
       verify(() => mockHttpClient.get(Uri.parse(expectedUrl))).called(1);
@@ -372,87 +328,68 @@ void main() {
 
   group('Error Handling', () {
     test('should throw Exception on network timeout', () async {
-      // Arrange
       when(() => mockHttpClient.get(any())).thenThrow(
         Exception('Network timeout'),
       );
 
-      // Act
       final call = dataSource.getCharacters;
 
-      // Assert
       expect(() => call(), throwsA(isA<Exception>()));
     });
 
     test('should throw Exception on socket exception', () async {
-      // Arrange
       when(() => mockHttpClient.get(any())).thenThrow(
         Exception('Socket exception'),
       );
 
-      // Act
       final call = dataSource.getCharacters;
 
-      // Assert
       expect(() => call(), throwsA(isA<Exception>()));
     });
 
     test('should handle 400 Bad Request by throwing Exception', () async {
-      // Arrange
       when(() => mockHttpClient.get(any())).thenAnswer(
         (_) async => http.Response('Bad Request', 400),
       );
 
-      // Act
       final call = dataSource.getCharacters;
 
-      // Assert
       expect(() => call(), throwsA(isA<Exception>()));
     });
 
     test('should handle 401 Unauthorized by throwing Exception', () async {
-      // Arrange
       when(() => mockHttpClient.get(any())).thenAnswer(
         (_) async => http.Response('Unauthorized', 401),
       );
 
-      // Act
       final call = dataSource.getCharacters;
 
-      // Assert
       expect(() => call(), throwsA(isA<Exception>()));
     });
 
     test('should handle 403 Forbidden by throwing Exception', () async {
-      // Arrange
       when(() => mockHttpClient.get(any())).thenAnswer(
         (_) async => http.Response('Forbidden', 403),
       );
 
-      // Act
       final call = dataSource.getCharacters;
 
-      // Assert
       expect(() => call(), throwsA(isA<Exception>()));
     });
 
     test('should handle 429 Too Many Requests by throwing Exception', () async {
-      // Arrange
       when(() => mockHttpClient.get(any())).thenAnswer(
         (_) async => http.Response('Too Many Requests', 429),
       );
 
-      // Act
       final call = dataSource.getCharacters;
 
-      // Assert
       expect(() => call(), throwsA(isA<Exception>()));
     });
   });
 
   group('Response Parsing', () {
     test('should correctly parse response with empty results', () async {
-      // Arrange
       final emptyResponse = {
         "info": {"count": 0, "pages": 0, "next": null, "prev": null},
         "results": []
@@ -462,10 +399,8 @@ void main() {
         (_) async => http.Response(json.encode(emptyResponse), 200),
       );
 
-      // Act
       final result = await dataSource.getCharacters();
 
-      // Assert
       expect(result.info.count, 0);
       expect(result.info.pages, 0);
       expect(result.results, isEmpty);
@@ -474,7 +409,6 @@ void main() {
     });
 
     test('should correctly parse response with pagination info', () async {
-      // Arrange
       final paginatedResponse = {
         "info": {
           "count": 20,
@@ -510,10 +444,8 @@ void main() {
         (_) async => http.Response(json.encode(paginatedResponse), 200),
       );
 
-      // Act
       final result = await dataSource.getCharacters();
 
-      // Assert
       expect(result.info.count, 20);
       expect(result.info.pages, 2);
       expect(
@@ -523,7 +455,6 @@ void main() {
     });
 
     test('should handle character with missing optional fields', () async {
-      // Arrange
       final minimalCharacterResponse = {
         "info": {"count": 1, "pages": 1, "next": null, "prev": null},
         "results": [
@@ -548,10 +479,8 @@ void main() {
         (_) async => http.Response(json.encode(minimalCharacterResponse), 200),
       );
 
-      // Act
       final result = await dataSource.getCharacters();
 
-      // Assert
       expect(result.results[0].name, "Test Character");
       expect(result.results[0].type, "");
       expect(result.results[0].episode, isEmpty);
@@ -560,7 +489,6 @@ void main() {
 
   group('Performance and Edge Cases', () {
     test('should handle very long character names', () async {
-      // Arrange
       final longNameResponse = {
         "info": {"count": 1, "pages": 1, "next": null, "prev": null},
         "results": [
@@ -585,15 +513,12 @@ void main() {
         (_) async => http.Response(json.encode(longNameResponse), 200),
       );
 
-      // Act
       final result = await dataSource.getCharacters();
 
-      // Assert
       expect(result.results[0].name, hasLength(100));
     });
 
     test('should handle large number of characters in response', () async {
-      // Arrange
       final largeResponse = {
         "info": {"count": 100, "pages": 1, "next": null, "prev": null},
         "results": List.generate(
@@ -620,10 +545,8 @@ void main() {
         (_) async => http.Response(json.encode(largeResponse), 200),
       );
 
-      // Act
       final result = await dataSource.getCharacters();
 
-      // Assert
       expect(result.results.length, 100);
       expect(result.info.count, 100);
     });

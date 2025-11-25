@@ -10,10 +10,8 @@ import 'package:multiverse_guide/presentation/bloc/character_list_event.dart';
 import 'package:multiverse_guide/presentation/bloc/character_list_state.dart';
 import 'package:multiverse_guide/core/errors/failures.dart';
 
-// Mocks
 class MockGetCharacters extends Mock implements GetCharacters {}
 
-// Fake classes for event matching
 class FakeGetCharactersParams extends Fake implements GetCharactersParams {}
 
 void main() {
@@ -27,7 +25,6 @@ void main() {
     mockGetCharacters = MockGetCharacters();
   });
 
-  // Test data
   const tCharactersPage1 = [
     Character(
       id: 1,
@@ -78,10 +75,8 @@ void main() {
 
   group('CharacterListBloc Initialization', () {
     test('initial state is CharacterListState.initial()', () {
-      // Arrange
       final bloc = createBloc();
 
-      // Assert
       expect(bloc.state, const CharacterListState());
     });
   });
@@ -318,13 +313,12 @@ void main() {
         const CharacterListState(
           isLoading: true,
           errorMessage: null,
-          characters: tCharactersPage1, // Maintains during loading
+          characters: tCharactersPage1,
         ),
         const CharacterListState(
           isLoading: false,
           errorMessage: 'Erro no servidor. Tente novamente.',
-          characters:
-              tCharactersPage1, // Should maintain characters on error for first page?
+          characters: tCharactersPage1,
         ),
       ],
     );
